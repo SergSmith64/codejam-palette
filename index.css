@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(./fonts/Robotobold.woff2) format('woff2'), url(./public/fonts/Robotobold.woff) format('woff'), url(./public/fonts/Robotobold.ttf) format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(./fonts/Robotobolditalic.woff2) format('woff2'), url(./public/fonts/Robotobolditalic.woff) format('woff'), url(./public/fonts/Robotobolditalic.ttf) format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Black'), local('Roboto-Black'), url(./fonts/Robotoblack.woff2) format('woff2'), url(./public/fonts/Robotoblack.woff) format('woff'), url(./public/fonts/Robotoblack.ttf) format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(./fonts/Robotoblackitalic.woff2) format('woff2'), url(./public/fonts/Robotoblackitalic.woff) format('woff'), url(./public/fonts/Robotoblackitalic.ttf) format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
