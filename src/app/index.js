@@ -1,3 +1,5 @@
+import '../scss/main.scss';
+
 let canvasWidth = 512;
 let canvasHeight = 512;
 let image = [];
@@ -9,6 +11,10 @@ if (localStorage.getItem('image')) {
 } 
 
 let pixelSize = canvasWidth / canvasSize;
+//let canvasSize = localStorage.getItem('canvasSize') ? localStorage.getItem('canvasSize') : 4;
+
+//console.log(localStorage.getItem('image'));
+//let currentTool = localStorage.getItem('currentTool') ? localStorage.getItem('currentTool') : 'pensil';
 let currentTool = 'pensil';
 let unSelectTools = unSelectPensil;
 
@@ -26,6 +32,8 @@ const canvas = document.getElementById("canvas");
 
 const ctx = canvas.getContext('2d');  
 localStorage.getItem('image') ? drawImage(ctx, image): canvasClear();
+//canvasClear();
+//--------panel-tools-------------
 function selectTool(tool) {
   const toolEl = document.querySelector(`.tools__item--${tool}`);
   if (toolEl) {
@@ -81,7 +89,7 @@ document.querySelectorAll('.tools__item').forEach((item) => {
     }
 });
 
-
+//--------panel-switcher----
 function selectSwitcher(item) {    
   document.querySelector(`.switcher__item--${canvasSize}`).classList.remove('selected');
   item.classList.add('selected');
@@ -100,7 +108,7 @@ document.querySelectorAll('.switcher__item').forEach(item => {
   } 
 });
 
-
+//--------panel-colors------------
 function selectColor(item) {  
   if (item.firstChild !== null) {
     switch(item.dataset.color) {
@@ -176,13 +184,17 @@ function unSelectPensil() {
   canvas.removeEventListener('mouseup', stopPensil);
   canvas.removeEventListener('mouseout', stopPensil);
 }
-
+/*
+function selectMove(){}
+function unSelectMove(){}
+*/
 function selectSave(){
   saveImage();
 }
 function unSelectSave(){}
 
 
+//-----------chooce-color----------
 function chooseColor(event){
   let {x, y} = getPos(event);
   changeColor(image[x][y]);  
@@ -197,12 +209,12 @@ function changeColor(color) {
     prevColorElement.style.backgroundColor = prevColor;    
   }  
 }
-
+//-------paint-bucket-----
 function paintBucket(event) {
   let {x, y} = getPos(event);  
   fill(x, y, image[x][y], currentColor);  
 }
-
+//------------pensil----------
 let lastX = 0;
 let lastY = 0;
 
@@ -288,7 +300,7 @@ function drawImage(canvas, dataArray) {
     }
 }
 
-function fill(x, y, oldColor, newColor){ 
+function fill(x, y, oldColor, newColor){ // Функция заливки многоугольника цветом color  
   let stack = [[x,y]];
   for ( let i = 0; i != stack.length; i++) {    
     let x = stack[i][0], y = stack[i][1];          
@@ -302,7 +314,7 @@ function fill(x, y, oldColor, newColor){
     }
   }
 }
-
+/*
 function setHotKey(keyCode) {    
   switch(keyCode) {
     case 'KeyP': {      
@@ -320,7 +332,7 @@ function setHotKey(keyCode) {
     default:
   }
 }
-
+*/
 import setHotKey from './hotkey';
 document.addEventListener('keydown', (event) => selectTool(setHotKey(event.code)));
 
