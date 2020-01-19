@@ -1,4 +1,25 @@
-export default function setHotKey(keyCode) {    
+// ___БЫЛО___
+// export default function setHotKey(keyCode) {
+//   switch(keyCode) {
+//     case 'KeyP': {      
+//       return 'pensil';      
+//     }
+//     case 'KeyB':{
+//       return 'paint-bucket';      
+//     }
+//     case 'KeyC': {
+//       return 'select-color';
+//     }
+//     case 'KeyS': {
+//       return 'save';
+//     }
+//     default:
+//   }
+// }
+
+
+// ____СТАЛО____
+export default function setHotKey(keyCode) {
   switch(keyCode) {
     case 'KeyP': {      
       return 'pensil';      
