@@ -35,4 +35,5 @@ export default function setHotKey(keyCode) {
     }
     default:
   }
+  console.log("__работает___Set-Hot-Key___");
 }

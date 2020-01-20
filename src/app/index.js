@@ -21,17 +21,12 @@ let pixelSize = canvasWidth / canvasSize;
 // ___УБРАЛ РАННЕЕ________________________________________
 //let canvasSize = localStorage.getItem('canvasSize') ? localStorage.getItem('canvasSize') : 4;
 
-
-// ___УБРАЛ РАННЕЕ-2________________________________________
-console.log(localStorage.getItem('image'));
-
-
 // ___УБРАЛ РАННЕЕ________________________________________
 //let currentTool = localStorage.getItem('currentTool') ? localStorage.getItem('currentTool') : 'pensil';
 
 
 // ___ УБРАТЬ _________ВЫВОДИТ БЕЛЫЙ_____
-console.log(localStorage.getItem('image'));
+// console.log(localStorage.getItem('image'));
 
 let currentTool = 'pensil';
 let unSelectTools = unSelectPensil;
@@ -63,8 +58,8 @@ function selectTool(tool) {
     unSelectTools();
     currentTool = tool;
     // ____ УБРАТЬ _____
-    console.log("__currentTool____", currentTool);
-    console.log("__tool___________", tool);
+    // console.log("__currentTool____", currentTool);
+    console.log("__tool____ПЕРЕКЛЮЧАЮСЬ НА_____", tool);
 
     toolEl.classList.add('selected');
     localStorage.setItem('currentTool', currentTool);
@@ -115,8 +110,8 @@ function selectTool(tool) {
   }  
 }
 
-document.querySelectorAll('.tools__item').forEach((item) => {   
-    item.addEventListener('click', () => selectTool(item.dataset.type)); 
+document.querySelectorAll('.tools__item').forEach((item) => {
+    item.addEventListener('click', () => selectTool(item.dataset.type));
     if (item.dataset.type === currentTool) {
       item.classList.add('selected');
       selectPensil();
@@ -124,39 +119,44 @@ document.querySelectorAll('.tools__item').forEach((item) => {
 });
 
 //--------panel-switcher----
-function selectSwitcher(item) {    
+function selectSwitcher(item) {
   document.querySelector(`.switcher__item--${canvasSize}`).classList.remove('selected');
   item.classList.add('selected');
 
   canvasSize = item.dataset.canvassize;
-  pixelSize = canvasWidth / canvasSize;    
-  canvasClear();       
+  pixelSize = canvasWidth / canvasSize;
+  
+  console.log("__РАЗМЕР__canvasWidth__ДЕЛИТЬ____= ", canvasWidth);
+  console.log("__РАЗМЕР__canvasSize___НА________= ", canvasSize);
+  console.log("__РАЗМЕР__pixelSize____ПОЛУЧАЕМ__= ", pixelSize);
+  
+  canvasClear();
   localStorage.setItem('canvasSize',canvasSize);
 }
 
 document.querySelectorAll('.switcher__item').forEach(item => {
   item.addEventListener('click', () => selectSwitcher(item));
     
-  if (item.dataset.canvassize == canvasSize) {    
-    item.classList.add('selected');        
-  } 
+  if (item.dataset.canvassize == canvasSize) {
+    item.classList.add('selected');
+  }
 });
 
 //--------panel-colors------------
-function selectColor(item) {  
+function selectColor(item) {
   if (item.firstChild !== null) {
     switch(item.dataset.color) {
-      case 'current': {                
+      case 'current': {
         currentColorInput.click();
-        currentColorElement.style.backgroundColor = currentColor;   
+        currentColorElement.style.backgroundColor = currentColor;
         break;
       }
-      case 'prev': {                
+      case 'prev': {
         changeColor(prevColor);
         break;
       }
       default: {
-        changeColor(item.dataset.color);        
+        changeColor(item.dataset.color);
       }
     }
   }
@@ -168,7 +168,7 @@ currentColorInput.addEventListener('change', (item) => {
 });
 
 
-document.querySelectorAll('.colors__item').forEach((item) => {   
+document.querySelectorAll('.colors__item').forEach((item) => {
   item.addEventListener('click', () => selectColor(item));
   
   if (item.firstChild !== null) {
@@ -258,6 +258,7 @@ let lastX = 0;
 let lastY = 0;
 
 function startPensil(event) {
+  console.log("__работает___startPensil__");
   let {x, y} = getPos(event);
   drawPixel(ctx, x, y, pixelSize, currentColor);
   lastX = x;
@@ -279,6 +280,7 @@ function stopPensil() {
 }
 
 function canvasClear() {
+  console.log("__работает___canvasClear___");
   image = [];
   for (let i = 0; i < canvasSize; i++){
     image[i] = [];
@@ -293,14 +295,17 @@ function canvasClear() {
 function getPos(event) {
   let x = Math.floor(event.offsetX / pixelSize);
   let y = Math.floor(event.offsetY / pixelSize);
+  // console.log("___работает___Get-Position___");
+  // console.log("___позиции__X и Y___ ", x, "___", y);
   return {x, y};
 }
 
 function drawPixel(canvas, x, y, pixelSize, color) {  
+  // console.log("__работает__сама________");
   image[x][y] = color;
   canvas.fillStyle = color;
-  // ___ УБРАТЬ ___
-  console.log("color___= ", color);
+  // ___ УБРАТЬ ___ НЕ ВКЛЮЧАТЬ __!!!___
+  console.log("__ЦВЕТ_СЕЙЧАС__= ", color);
   canvas.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
 }
 
@@ -310,6 +315,7 @@ function drawLine(x1, y1, x2, y2) {
   let signX = x1 < x2 ? 1 : -1;
   let signY = y1 < y2 ? 1 : -1;
   let error = deltaX - deltaY;
+  console.log("__работает___drawLine___");
 
   drawPixel(ctx, x2, y2, pixelSize, currentColor);
   while(x1 != x2 || y1 != y2) {      
@@ -344,10 +350,10 @@ function drawLine(x1, y1, x2, y2) {
 
 
 
-
 // ___ ЗАЛИВАЮ многоугольник цветом color _____
 function fill(x, y, oldColor, newColor){
   let stack = [[x,y]];
+  console.log("__работает___Fill___");
   for ( let i = 0; i != stack.length; i++) {    
     let x = stack[i][0], y = stack[i][1];          
     if( x>= 0 && y >= 0 && x < canvasSize && y < canvasSize && image[x][y] == oldColor){

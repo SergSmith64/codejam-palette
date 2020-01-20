@@ -1,4 +1,5 @@
 module.exports.drawImage = (canvas, dataArray) => {
+  console.log("__работает__модуль__drawImage____");
   let sizePixel = 0;
   let x = 0;
   let y = 0;
