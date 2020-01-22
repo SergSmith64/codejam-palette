@@ -12,11 +12,11 @@ module.exports = {
     rules: [
       {
         test: /\.(ico|jpg|png|svg)$/,
-        loader: 'file-loader', 
+        loader: 'file-loader',
         options: {
-            name: './public/images/[name].[ext]'                    
-        }               
-    }, 
+          name: './public/images/[name].[ext]'
+        }
+      },
       {
         test: /\.(eot|ttf|woff|woff2)$/,
         loader: 'file-loader?name=./public/fonts/[name].[ext]'
